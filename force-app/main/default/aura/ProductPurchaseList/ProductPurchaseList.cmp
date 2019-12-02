@@ -1,0 +1,59 @@
+<aura:component controller="ProductController" implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome" access="global" >
+    
+    <!-- attributes -->
+    <aura:attribute name="isModalOpen" type="boolean" default="false"/>
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="selectedRowsCount" type="Integer" default="0"/>
+    <aura:attribute name="selectedCriteria" type="String"/>
+    <aura:attribute name="maxRowSelection" type="Integer" default="10"/>
+    <aura:attribute name="filter" type="String" />
+    <aura:attribute name="filteredData" type="List" />
+    <aura:attribute name="showFilter" type="Boolean" default="false"/>
+    
+    <aura:handler event="c:updateProductList" action="{!c.updateProducts}"/>
+    
+    <!-- handlers-->
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <!-- the container element determine the height of the datatable -->
+    <lightning:card title="Filter Products">
+        <div class="slds-m-around_small">
+            <lightning:select aura:id="criteria" name="select" label="Select criteria" onchange="{! c.onChange }">
+                <option value="">None</option>
+                <option value="Category">Category</option>
+                <option value="Brand">Brand</option>
+                <option value="Product">Product</option>
+            </lightning:select>
+        </div>
+        <div class="slds-m-around_small">
+            {!v.body}
+        </div>
+        <aura:if isTrue="{!v.showFilter}">
+            <div class="slds-m-around_small">
+                <lightning:input type="text" onchange="{!c.filter}" value="{!v.filter}" label="Filter" />
+            </div>
+        </aura:if>
+    </lightning:card>
+    
+    <lightning:card iconName="action:new_note" title="Purchase Products">
+        <div class="slds-m-around_small">
+            <h1>Selected Rows: {! v.selectedRowsCount }</h1>
+            <lightning:datatable
+                                 aura:id="table"
+                                 columns="{! v.columns }"
+                                 data="{! v.filteredData }"
+                                 keyField="id"
+                                 maxRowSelection="{! v.maxRowSelection }"
+                                 onrowselection="{! c.updateSelectedText }"/>
+        </div>
+    </lightning:card>
+    <br/>
+    <br/>
+    <lightning:button variant="brand"
+                      label="Purchase"
+                      title="Purchase"
+                      onclick="{!c.openModal}"
+                      class="slds-align_absolute-center"/>
+    <c:QuantityModal isModalOpen="false" aura:id="quantityModal"/>
+    
+</aura:component>

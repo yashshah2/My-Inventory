@@ -1,0 +1,51 @@
+<aura:component implements="flexipage:availableForAllPageTypes,lightning:actionOverride"
+                access="global" >
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="truth" type="Boolean" default="true"/>
+    <aura:registerEvent name="recordUpdated" type="c:recordUpdated" />
+    <div aura:id="newDialog" role="dialog" tableindex="-1" aria-labelledby="header43" 
+         class="slds-modal slds-fade-in-open">
+        <aura:if isTrue="{!v.truth}">
+        <div class="slds-modal__container">
+            <div class="slds-modal__header">
+            	<h2 class="slds-text-heading--medium">New Product</h2>
+            </div>
+        	<div class="slds-modal__content slds-p-around--large slds-grid slds-wrap">
+                
+        
+                
+                    <lightning:recordEditForm aura:id="newProduct"
+                                              objectApiName="Product__c"
+                                              onsuccess="{!c.handleSuccess}"
+                                              >
+                        <lightning:messages/>
+                        
+                            <lightning:inputField fieldName="Name"
+                                                  />
+                            <lightning:inputField fieldName="Brand__c" 
+                                                  />
+                        
+                            <lightning:inputField fieldName="Category__c"
+                                                  />
+                            <lightning:inputField fieldName="Supplier__c" 
+                                                  />
+                            <lightning:inputField fieldName="Supplier_Price__c"
+                                                  />
+                            <lightning:inputField fieldName="Unit_Price__c"
+                                                  />
+                            <lightning:inputField fieldName="Stock__c"
+                                                  />
+                        <div class="slds-modal__footer">
+                            <lightning:button variant="neutral" label="Cancel" 
+                                              onclick="{!c.cancelDialog}" />
+                            <lightning:button variant="brand" label="Submit" type="submit" />
+                        </div>
+                    </lightning:recordEditForm>
+                
+
+            </div>
+    	</div>  
+        </aura:if>
+    </div>
+    <div aura:id="overlay" class="slds-backdrop slds-backdrop--open"></div>
+</aura:component>

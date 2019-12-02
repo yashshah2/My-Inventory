@@ -1,0 +1,36 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" 
+                controller="ProductController" >
+    
+    <aura:attribute name="products" type="Object[]" />
+    <aura:attribute name="myProduct" type="Product__c" />
+    <aura:handler name="init" value="{! this}" action="{!c.myInit}"/>
+    <aura:handler event="c:recordUpdated" action="{!c.myInit}"/>
+    
+    <force:recordData aura:id="productService"
+        recordId="{!v.recordId}"
+        targetRecord="{!v.myProduct}"
+        recordUpdated="{!c.myInit}"
+        layoutType="FULL"/>
+
+    
+    <lightning:card iconName="custom:custom28" title="Edit/Delete Products">
+    	<div class="slds-p-left_medium slds-p-right_medium">
+        	<ul class="slds-list_vertical slds-has-dividers_top-space">
+                <aura:if isTrue="{!v.products.length >0}">
+                    <aura:iteration items="{!v.products}" var="item">
+                        <li>
+                            <c:displayEachProducts product="{!item}" />
+                        </li>
+                    </aura:iteration>
+                </aura:if>
+                <aura:set attribute="else">
+                	<li class="slds=list__item">
+                        <h3 class="slds-text-small slds-text-color_error">No Products Found!</h3>
+                    
+                    </li>
+                </aura:set>
+            </ul>
+        </div>
+    </lightning:card>
+	
+</aura:component>

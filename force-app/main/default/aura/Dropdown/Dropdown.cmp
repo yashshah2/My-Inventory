@@ -1,0 +1,15 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+
+    <aura:attribute name="name" type="String"/>
+    <aura:attribute name="label" type="String"/>
+    <aura:attribute name="value" type="String"/>
+    <aura:attribute name="options" type="List"/>
+    <aura:registerEvent name="updateProductList" type="c:updateProductList"/>
+
+    <lightning:select name="{! v.name }" label="{! 'Select ' + v.label }" value="{! v.value }" onchange="{!c.onFilterChange}">
+        <aura:iteration var="option" items="{! v.options }">
+            <option value="{! option.value }">{! option.label }</option>
+        </aura:iteration>
+    </lightning:select>
+
+</aura:component>

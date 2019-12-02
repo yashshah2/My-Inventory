@@ -1,0 +1,36 @@
+<aura:component>
+    <aura:attribute name="item" type="Purchase_Order_Item__c"/>
+    <aura:attribute name="recordError" type="String"/>
+    <force:recordData aura:id="recordHandler"
+                      recordId="{!v.item.Id}"
+                      fields = "Id"
+                      targetError = "{!v.recordError}"/>
+    <lightning:recordViewForm aura:id="viewForm" recordId="{!v.item.Id}" objectApiName="Purchase_Order_Item__c">
+        <div class="slds-media">
+            <div class="slds-media__figure">
+                
+            </div>
+            <div class="slds-media__body">
+                <lightning:layout class="slds-hint-parent">
+                    <a onclick="{!c.navigate}">
+                        <h3 class="slds-text-heading_small slds-m-bottom_xx-small">{!v.item.Name}</h3>
+                    </a>                    
+                  <!--<lightning:buttonIcon iconName="utility:delete" class="slds-col_bump-left" iconClass="slds-button__icon_hint" variant="bare" alternativeText="Delete Record" onclick="{!c.handleDeleteRecord}"/>-->
+                </lightning:layout>
+          
+                <lightning:layout>
+                <h3 class="slds-text-heading_small slds-m-bottom_xx-small">Quantity: {!v.item.Quantity__c}</h3>
+                </lightning:layout>
+                
+                <lightning:layout>
+                <h3 class="slds-text-heading_small slds-m-bottom_xx-small">Unit Price: ${!v.item.Unit_Price__c}</h3>
+                </lightning:layout>
+                
+                <lightning:layout>
+                <h3 class="slds-text-heading_small slds-m-bottom_xx-small">Item Total: ${!v.item.Item_Total__c}</h3>
+                </lightning:layout>
+                              
+            </div>
+        </div>
+    </lightning:recordViewForm>
+</aura:component>

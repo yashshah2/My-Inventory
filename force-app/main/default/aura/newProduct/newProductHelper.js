@@ -1,0 +1,4 @@
+({
+    navigateTo: function(component) {
+    }
+})

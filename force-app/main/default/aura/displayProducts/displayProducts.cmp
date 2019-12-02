@@ -1,0 +1,18 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global"
+                controller="productsController" >
+    <aura:attribute name = "products" type="Object[]" />
+    <aura:handler name="init" action="{!c.myInit}" value="{!this}" />
+    <lightning:card iconName="custom:custom89" title="Products">
+        <div class="slds-p-left_medium slds-p-right_medium">
+        	<ul class="slds-list_vertical slds-has-dividers_top-space">
+            	<aura:iteration items="{!v.products}" var="item">
+                	<li class="slds-list__item">
+                        <c:displayEachProducts product="{!item}" />
+                    </li>
+                </aura:iteration>
+            </ul>
+                
+        </div>
+    	
+    </lightning:card>
+</aura:component>

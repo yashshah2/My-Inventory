@@ -1,0 +1,27 @@
+<aura:component controller="ProductController" implements="flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes,force:hasRecordId" access="global" >
+	
+    <aura:attribute name="items" type="Object[]"/>
+    <aura:attribute name="users" type="Object[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <lightning:card iconName="custom:custom85" title="{! 'List of items'}" class="slds-is-relative">
+        <div class="slds-p-left_medium slds-p-right_medium">
+            <ul class="slds-list_vertical slds-has-dividers_top-space">
+                <aura:if isTrue="{!v.items.length &gt; 0}">
+                    <aura:iteration items="{!v.items}" var="item">
+                        <li class="slds-list__item">
+                            <c:DisplayItems item="{!item}"/>
+                        </li>
+                    </aura:iteration>
+               		  <aura:set attribute="else">
+                        <li class="slds-list__item">
+                            <h3 class="slds-text-small slds-text-color_error">No items found.</h3>
+                        </li>
+                    </aura:set>
+               </aura:if>
+            </ul>
+        </div>
+        
+    </lightning:card>
+    <p><b>   			An Email will be sent to you regarding your purchase..<br/>Thankyou</b></p>
+        
+</aura:component>
